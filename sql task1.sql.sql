@@ -66,7 +66,7 @@ VALUES (41, 61),
  INNER JOIN Order_Details o
  ON c.Customer_ID = o.Customer_ID
 
-
+ 
  select * from [View Customer Details]
 
 
@@ -84,3 +84,31 @@ VALUES (41, 61),
   
   INNER JOIN BookS b
   ON s.Book_ID = b.Book_ID
+
+
+  
+  
+  -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  
+  -- we can update, delete base table ( main table ) by updating , deleting  in view . 
+
+  
+  -- create view
+  use w3schools
+  create view [study_VIEW] as
+  select * from study
+
+  -- select view
+  select * from [study_VIEW]
+
+
+  -- update base table by upadting in view
+  update [study_VIEW]
+  set cid =3
+  where sid = 4
+
+
+  -- delete row in base table by deleting row in view
+
+  delete from [study_VIEW]
+  where sid = 4

@@ -86,13 +86,13 @@ where mov_rel_country <> (select distinct mov_rel_country
 
 
 
--- 4. 
+-- 5. 
 select m.mov_title from movie m
 inner join movie_direction md
 on m.mov_id = md.mov_id
 where md.dir_id = ( select dir_id
 					from director 
-					where dir_fname = 'Woody')
+					where dir_fname = 'Woody' and dir_lname='Allen')
 
 -- movie			(mov_id)(pk)
 -- movie_direction	(mov_id (fk) , dir_id (fk))     movie and movie_direction is inner join and using sub qury on director.
@@ -100,7 +100,7 @@ where md.dir_id = ( select dir_id
 
 					
 
--- 5 . (need to took help)
+-- 4 . (need to took help)
 select m.mov_title , m.mov_year , m.mov_dt_rel , j.rev_name , d.dir_fname , d.dir_lname , a.act_fname , a.act_lname from movie m
 
 inner join rating r

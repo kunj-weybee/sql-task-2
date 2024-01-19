@@ -1,0 +1,67 @@
+https://www.youtube.com/watch?v=BQpBrUPktUQ - yt
+
+
+cursor is the temporary memory /temporary work space 
+
+= types of cursor = 
+
+1. implicit cursor
+2. exlicit cursor
+
+
+
+= methods of cursor = 
+
+1. first
+2. next
+3. last 
+4. prior 
+5. absolute n
+6. relative n
+
+
+
+
+
+note - execute all lines together starting from declare to deallocate
+
+eg =
+
+1.
+
+DECLARE EMP_CURSOR CURSOR scroll For
+select * from employees
+
+open myCursor
+
+fetch first from myCursor
+fetch next from myCursor
+fetch last from myCursor
+fetch prior from myCursor
+fetch absolute 4 from myCursor
+
+close myCursor
+deallocate myCursor
+
+
+
+2. 
+
+DECLARE EMP_CURSOR CURSOR scroll For
+select * from employees
+
+OPEN emp_cursor;	
+
+FETCH first FROM EMP_CURSOR 
+FETCH next FROM EMP_CURSOR 
+
+CLOSE  emp_cursor
+
+DEALLOCATE  emp_cursor
+
+
+
+
+
+
+
