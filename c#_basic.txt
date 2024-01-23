@@ -1,0 +1,1060 @@
+
+// if else = 
+
+using System;
+
+
+Console.ReadLine() = to take input from user
+Console.WriteLine() = to print something
+
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        Console.WriteLine("Enter a number:");
+        int num = Convert.ToInt32(Console.ReadLine());
+
+        if (num % 2 == 0)
+        {
+            Console.WriteLine("It is even number");
+        }
+        else
+        {
+            Console.WriteLine("It is odd number");
+        }
+
+        Console.ReadKey();
+    }
+}
+
+
+
+
+
+// switch case = 
+
+using System;
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        Console.WriteLine("Enter a number:");
+        float num = float.Parse(Console.ReadLine());
+
+        switch (num)
+        {
+            case 10: Console.WriteLine("It is 10"); break;
+            case 20: Console.WriteLine("It is 20"); break;
+            case 30: Console.WriteLine("It is 30"); break;
+            default: Console.WriteLine("Not 10, 20 or 30"); break;
+        }
+
+        Console.ReadKey();
+    }
+}
+
+
+
+// for = 
+
+using System;
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        int a = 5;
+
+        for(int i = 1 ; i <= a ; i++)
+        {
+            System.Console.WriteLine(i);
+        }
+
+        Console.ReadKey();
+    }
+}
+
+
+// while =
+
+using System;
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        int a = 5;
+
+        while(a<=10) 
+        {
+            Console.WriteLine(a);
+            a++;
+        }
+
+        Console.ReadKey();
+    }
+}
+
+
+
+// do while = 
+
+using System;
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        int a = 5;
+
+        do {
+            Console.WriteLine(a);
+            a++;
+        } while (a <= 10);
+
+        Console.ReadKey();
+    }
+}
+
+
+
+// simple function without parameter
+
+
+using System;
+class Program
+    {
+        public void Show()
+        {
+            Console.WriteLine("This is function");
+        }
+
+        public static void Main(string[] args)
+        {
+            Program program = new Program();
+            program.Show();
+            
+            Console.ReadKey();
+        }
+}
+
+    
+// function with parameter
+
+using System;
+class Program
+    {
+        public void Show(string name)
+        {
+            Console.WriteLine("hi "+name);
+        }
+
+        public static void Main(string[] args)
+        {
+            Program program = new Program();
+
+            program.Show("kunj");
+
+            Console.ReadKey();
+        }
+}
+
+
+
+// function with return type and parameter   
+	
+using System;
+class Program
+    {
+        public int Show(int n)
+        {
+            Console.WriteLine("this is inside funcion");
+            return n;
+        }
+
+        public static void Main(string[] args)
+        {
+            Program program = new Program();
+
+            int b = program.Show(5);
+            Console.WriteLine(b);
+
+            Console.ReadKey();
+        }
+}
+
+    
+	
+
+	
+// pass by value = 
+
+using System;
+class Program
+    {
+        public void Show(int a)
+        {
+            a = 2;
+            Console.WriteLine(a);
+        }
+
+        public static void Main(string[] args)
+        {
+            Program program = new Program();
+
+            int a = 1;
+            
+            Console.WriteLine(a);                   // 1
+
+            program.Show(a);                        // 2
+            Console.WriteLine(a);                   // 1
+
+            Console.ReadKey();
+        }
+}
+
+    
+	
+// pass by reference = 
+
+
+1 . by out = 	we have to atleast 1 time initialize value of parameter (a) in function (Show)
+
+using System;
+class Program
+    {
+        static void Show(out int a)
+        {
+            Console.WriteLine(a);	// incorrect					int b = 60;	
+            int b = 60;												a = b; 		// once value of a is initialize then only we can use a		
+            a = b;													Console.WriteLine(a);	// correct
+        }	
+
+        public static void Main(string[] args)
+        {
+
+            int a = 1;
+            
+            Console.WriteLine(a);                   // 1
+
+            Show(out a);                            // 2
+            Console.WriteLine(a);                   // 2
+
+            Console.ReadKey();
+        }
+}
+
+
+
+2 . by ref 
+
+
+using System;
+class Program
+    {
+        static void Show(ref int a)
+        {
+            Console.WriteLine(a);
+            a = 5;
+            Console.WriteLine(a);
+    }
+
+        public static void Main(string[] args)
+        {
+
+            int a = 1;
+            
+            Console.WriteLine(a);                   // 1
+
+            Show(ref a);                            // 1,5
+            Console.WriteLine(a);                   // 5
+
+            Console.ReadKey();
+        }
+}
+
+
+
+// array = 
+
+3 ways to declare & initialize array =
+		
+		
+		1. 
+		
+		int[] a = new int[]{ 10, 20, 30, 40, 50 };  
+		
+		2. 
+		
+		int[] a = new int[5]{ 10, 20, 30, 40, 50 };  
+		
+		3. 
+		
+		int[] a = { 10, 20, 30, 40, 50 };  	
+
+
+
+// single dimensional array = 
+
+															print using for loop
+using System;
+class Program
+{
+        public static void Main(string[] args)
+        {
+            int a = 5;
+            int[] b = new int[5];
+
+            for(int i = 0; i < a; i++) 
+            {
+                Console.Write("enter "+ (i+1) + "= ");						
+                b[i] = Convert.ToInt32(Console.ReadLine());
+            }
+
+            for (int i = 0; i < a; i++)
+            {
+                Console.WriteLine("value entered at "+i+"= "+b[i]);
+            }
+        Console.ReadKey();
+        }
+}
+
+
+//  enter 1= 1
+//  enter 2= 2
+//  enter 3= 3
+//  enter 4= 4
+//  enter 5= 5
+
+//  value entered at 0= 1
+//  value entered at 1= 2
+//  value entered at 2= 3
+//  value entered at 3= 4
+//  value entered at 4= 5
+
+
+
+
+
+															print using foreach
+
+using System;
+class Program
+{
+        public static void Main(string[] args)
+        {
+
+            int[] b = new int[5];
+            
+            for(int i = 0; i < b.Length; i++) 
+            {
+                Console.Write("enter "+ (i+1) + "= ");
+                b[i] = Convert.ToInt32(Console.ReadLine());
+            }
+
+            foreach (int i in b)
+            { 
+                Console.WriteLine(i);
+            }
+
+            Console.ReadKey();
+        }
+}
+
+
+//  enter 1= 1
+//  enter 2= 2
+//  enter 3= 3
+//  enter 4= 4
+//  enter 5= 5
+
+//  1
+//  2
+//  3
+//  4
+//  5
+
+
+
+
+// find min from array byy array a parameter to function 
+
+
+using System;
+class Program
+{
+    public static void Main(string[] args)
+    {
+        int[] a1 = { 25, 10, 20, 15, 40, 50 };
+        int[] a2 = { 12, 23, 44, 11, 54 };
+
+        printMin(a1);//passing array to function  
+        printMin(a2);
+
+        Console.ReadKey();
+    }
+    public static void printMin(int[] a1)
+    {
+        int min = a1[0];
+
+        for (int i = 0; i < a1.Length; i++) {
+            if (min > a1[i])
+            {
+                min = a1[i];
+            }
+        }
+
+        Console.WriteLine(min);
+    }
+}
+
+
+
+
+// multi - demensional array = 
+
+
+3 ways to declare = 
+
+
+1.		int[,] a = new int[,] {{ 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 }};
+
+ 
+2.		int[,] c = new int[3, 3] {{ 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 }};  
+
+
+3.		int[,] b = {{ 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 }};  
+
+
+
+using System;
+class Program
+{
+    public static void Main(string[] args)
+    {
+       
+        int[,] b = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
+
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                Console.Write(b[i, j]+ "\t");
+            }
+            Console.WriteLine();
+        }
+
+        Console.ReadKey();
+    }   
+}
+
+
+
+
+// params =  
+
+
+~ it is like rest parameter of javascript.       int add(...rest)	then rest would be list of all parameters . same way t will be list of all parameter here
+instead of ... here we have params to be written .
+
+~ params is used we dont know how many parameters are going to come in function .
+
+~ only 1 params we can give in argument 
+public static int Add(params int[] t).
+not like public static int Add(params int[] t , params int[] k).
+
+
+
+using System;
+class Program
+{
+    public static int Add(params int[] t)
+    {
+        int total = 0;
+
+        for(int i = 0; i<t.Length; i++)
+        {
+            total += t[i];
+        }
+
+        return total;
+    }
+
+    public static void Main(String[] args)
+    {
+
+        int a = Add(1,2);
+        Console.WriteLine(a);
+
+        Console.ReadKey();
+    }   
+}
+
+
+
+
+using System;
+class Program
+{
+    public static void Add(params object[] t)
+    {
+
+        for(int i = 0; i<t.Length; i++)
+        {
+            Console.WriteLine(t[i]);
+        }
+
+    }
+
+    public static void Main(String[] args)
+    {
+
+        Add('a',1,'b',2,3,5,6,7);
+
+        Console.ReadKey();
+    }   
+}
+
+
+
+
+~ it should be last paramter in function so that we can write parameter before it .
+
+using System;
+class Program
+{
+    public static void Add(int a, int b , int c , params object[] t)		// a = 1 , b = 2 , c = 3 , t = 4,5,6
+    {
+
+        for(int i = 0; i<t.Length; i++)
+        {
+            Console.WriteLine(t[i]);
+        }
+
+    }
+
+    public static void Main(String[] args)
+    {
+
+        Add(1,2,3,4,5,6);													// a = 1 , b = 2 , c = 3 , t = 4,5,6
+
+        Console.ReadKey();
+    }   
+}
+
+
+what is difference between arrays and params = 
+
+	// array 
+	using System;
+	class Program
+	{
+		public static void Add(int[] a)
+		{
+	
+			for (int i = 0; i < a.Length; i++)
+			{
+				Console.WriteLine(a[i]);
+			}
+	
+		}
+	
+		public static void Main(String[] args)
+		{
+			int[] a = {};
+			Add(a);
+	
+			Console.ReadLine();
+		}
+	}
+
+
+	// params 
+	using System;
+	class Program
+	{
+		public static void Add(params int[] a)
+		{
+	
+			for (int i = 0; i < a.Length; i++)
+			{
+				Console.WriteLine(a[i]);
+			}
+	
+		}
+	
+		public static void Main(String[] args)
+		{
+	
+			Add();
+	
+			Console.ReadKey();
+		}
+	}
+
+
+
+
+when you want to use array instead of parans then bofore passing array as the parameter, and you had to explicitly create an array before calling the method:when you want 	
+	
+instead of making array by = 
+
+int[] a = {1,2,3};
+Add(a);
+
+while params allows you to pass without creating array . here we can directly use params by =
+
+Add(1,2,3);
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+// CLASS & OBJECT = 
+
+we can initialise the value of 1 classs from another class by 3 ways = 
+
+1. by method =
+
+                        using System;
+
+                        class Student
+                        {
+                            public int id;
+                            public String name;
+
+                            public void insert(int i, String n)					// initializing value of instance variable of class student by method and calling this method from main class
+                            {
+                                id = i;
+                                name = n;
+                            }
+
+                            public void display()
+                            {
+                                Console.WriteLine(id + " " + name);
+                            }
+                        }
+
+                        class main
+                        {
+                            public static void Main(string[] args)
+                            {
+                                Student s1 = new Student();
+        
+                                s1.insert(101, "Ajeet");
+                                s1.display();
+
+                                Console.ReadLine();
+                            }
+                        }
+
+
+
+
+2. by assiging value directly = 		
+
+			        using System;
+
+                                class Student
+                                {
+                                    public int id;
+                                    public String name;
+                                }
+
+                                class TestStudent
+                                {
+                                    public static void Main(string[] args)
+                                    {
+                                        Student s1 = new Student();
+
+                                        s1.id = 101;							// initialising value of instance variable of student class by this class by making object of that class.
+                                        s1.name = "Sonoo Jaiswal";
+
+                                        Console.WriteLine(s1.id);
+                                        Console.WriteLine(s1.name);
+
+                                        Console.ReadKey();
+                                    }
+                                }
+
+			
+
+3. by constructor = 
+
+
+				
+                                using System;
+
+                                public class Employee
+                                {
+                                    public int id;
+                                    public String name;
+                                    public float salary;
+
+                                    public Employee(int i, String n, float s)
+                                    {
+                                        id = i;
+                                        name = n;
+                                        salary = s;
+                                    }
+
+                                    public void display()
+                                    {
+                                        Console.WriteLine(id + " " + name + " " + salary);
+                                    }
+                                }
+
+                                class TestEmployee
+                                {
+                                    public static void Main(string[] args)
+                                    {
+                                        Employee e1 = new Employee(101, "Sonoo", 1200000);
+                                        e1.display();
+
+                                        Console.ReadKey();
+                                    }
+                                }
+
+
+
+
+
+
+
+
+// constructor =
+
+
+                        using System;
+                        public class Employee
+                        {
+                            int a;
+                            public Employee()
+                            {
+                                a = 5;
+                            }
+                            public static void Main(string[] args)
+                            {
+                                Employee e1 = new Employee();
+                                Employee e2 = new Employee();
+
+                                Console.WriteLine(e1.a);
+
+                                Console.ReadKey();
+                            }
+                        }
+
+2 types of contructor = 
+
+1. default constructor
+2. parameterised constructor
+
+
+
+
+// destruct constructor = 
+
+
+
+				using System;
+                                
+				class Employee
+                                {
+                                    public Employee()
+                                    {
+                                        Console.WriteLine("Constructor Invoked");
+                                    }
+
+                                    ~Employee()							// destruct c
+                                    {
+                                        Console.WriteLine("Destructor Invoked");
+                                    }
+                                }
+
+                                class Main
+                                {
+                                    public static void Main(string[] args)
+                                    {
+                                        Employee e1 = new Employee();
+
+                                        Console.ReadKey();
+                                    }
+                                }
+
+// this = 
+
+
+
+                                using System;
+
+                                public class Employee
+                                {
+                                    public int id;
+                                    public String name;
+                                    public float salary;
+                                    
+                                    public Employee(int id, String name, float salary)
+                                    {
+                                        this.id = id;
+                                        this.name = name;
+                                        this.salary = salary;
+                                    }
+
+                                    public void display()
+                                    {
+                                        Console.WriteLine(id + " " + name + " " + salary);
+                                    }
+                                }
+                                class TestEmployee
+                                {
+                                    public static void Main(string[] args)
+                                    {
+                                        Employee e1 = new Employee(101, "Sonoo", 890000f);
+                                        Employee e2 = new Employee(102, "Mahesh", 490000f);
+                                        e1.display();
+                                        e2.display();
+                                        
+       
+                                    }
+                                }
+
+
+// static =
+
+
+
+In C# below can be static = 	 
+	field, 
+	method, 
+	constructor, 			// in java it was not static
+	class, 
+	properties, 
+	operator, 
+	event 	 		
+
+
+
+
+	                        using System;
+                               
+				public class Account
+                                {
+                                    public int accno;
+                                    public String name;
+                                    public static float rateOfInterest = 8.8f;
+
+                                    public Account(int accno, String name)
+                                    {
+                                        this.accno = accno;
+                                        this.name = name;
+                                    }
+
+                                    public void display()
+                                    {
+                                        Console.WriteLine(accno + " " + name + " " + rateOfInterest);
+                                    }
+                                }
+
+                                class TestAccount
+                                {
+                                    public static void Main(string[] args)
+                                    {
+                                        Account a1 = new Account(101, "Sonoo");
+                                        Account a2 = new Account(102, "Mahesh");
+                                        a1.display();
+                                        a2.display();
+
+                                    }
+                                }
+
+
+
+				
+
+
+
+								// changing static field will be applied to all 
+
+
+				    using System;
+
+                                    public class Account
+                                    {
+                                        public int accno;
+                                        public String name;
+                                        public static double rateOfInterest = 8.8;
+
+                                        public Account(int accno, String name)
+                                        {
+                                            this.accno = accno;
+                                            this.name = name;
+                                        }
+
+                                        public void display()
+                                        {
+                                            Console.WriteLine(accno + " " + name + " " + rateOfInterest);
+                                        }
+                                    }
+
+                                    class TestAccount
+                                    {
+                                        public static void Main(string[] args)
+                                        {
+                                            Account.rateOfInterest = 10.5;
+
+                                            Account a1 = new Account(101, "Sonoo");
+                                            Account a2 = new Account(102, "Mahesh");
+        
+                                            a1.display();
+                                            a2.display();
+
+                                            Console.ReadLine();
+                                        }
+                                    }
+
+
+
+
+
+//  static class = 
+
+->	it contains only static members.
+->	we can not create object of static class.
+
+
+				using System;
+
+                                public static class Static_Class
+                                {
+                                    public static int a = 5;
+
+                                    public static string display() 
+                                    {
+                                        return "hello";
+                                    }
+                                }
+
+                                class Main_Class
+                                {
+                                    public static void Main(string[] args)
+                                    {
+                                        Console.WriteLine( Static_Class.a );
+
+                                        Console.WriteLine( Static_Class.display() );
+
+                                        Console.ReadKey();
+                                    }
+                                }
+
+
+// static constructor =  
+
+-> 	C# static constructor is used to initialize static fields.
+
+
+-> 	C# static constructor cannot have any modifier or parameter.
+-> 	C# static constructor is invoked implicitly. It can't be called explicitly.
+
+
+-> 	only statc constructor can initialize static variables.	Static variables are typically initialized using a static constructor or at the time of declaration.
+
+                                                    public class MyClass
+                                                    {
+
+                                                        // Static variable initialized using a static constructor
+                                                        public static int a;
+
+
+                                                        // Normal constructor (instance constructor)
+                                                        public MyClass()
+                                                        {
+                                                            a = 20;        // wrong             // This constructor cannot initialize static variables
+                                                        }
+
+
+                                                        // Static constructor
+                                                        static MyClass()
+                                                        {
+                                                            a = 20;        // correct
+                                                        }
+                                                    }
+
+
+
+
+
+                                                using System;
+
+                                                public class Account
+                                                {
+
+                                                    public int id;
+                                                    public String name;
+                                                    public static float rateOfInterest;                   // static members can only be initialised with static constructor
+
+                                                    public Account(int id, String name)
+                                                    {
+                                                        this.id = id;
+                                                        this.name = name;
+                                                    }
+
+                                                    static Account()					   //  static constructor
+                                                    { 
+                                                        rateOfInterest = 9.5f;
+                                                    }
+
+                                                    public void display()
+                                                    {
+                                                        Console.WriteLine(id + " " + name + " " + rateOfInterest);
+                                                    }
+
+                                                }
+
+
+                                                class TestEmployee
+                                                {
+                                                    public static void Main(string[] args)
+                                                    {
+
+                                                        Account a1 = new Account(101, "amisha");
+                                                        a1.display();
+
+                                                    }
+                                                }
+
+                                
+
+
+// enum = 
+
+it is enumeration .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -222,6 +222,26 @@ set statistics time  off
 
 -- CURSOR
 
+-- forward only cursor .
+-- it can only go in 1 direction that is forward . 
+-- to use this we have to use (FETCH next FROM EMP_CURSOR) instead of (FETCH first FROM EMP_CURSOR)
+
+DECLARE EMP_CURSOR CURSOR For
+select * from employees
+
+OPEN emp_cursor;	
+
+FETCH next FROM EMP_CURSOR 
+FETCH next FROM EMP_CURSOR 
+
+CLOSE  emp_cursor
+
+DEALLOCATE  emp_cursor
+
+---------------------------------------
+-- scroll cursor
+-- it can go forward and backward
+
 DECLARE EMP_CURSOR CURSOR scroll For
 select * from employees
 
@@ -235,7 +255,37 @@ CLOSE  emp_cursor
 DEALLOCATE  emp_cursor
 
 
+---------------------------------------
 
+1.
+
+DECLARE EMP_CURSOR CURSOR scroll For
+select * from employees
+
+open myCursor
+
+fetch first from myCursor
+fetch next from myCursor
+fetch last from myCursor
+fetch prior from myCursor
+fetch absolute 4 from myCursor
+
+close myCursor
+deallocate myCursor
+
+
+
+2. 
+
+DECLARE EMP_CURSOR CURSOR scroll For
+select * from employees
+
+OPEN emp_cursor;	
+
+FETCH first FROM EMP_CURSOR 
+FETCH next FROM EMP_CURSOR 
+
+CLOSE  emp_cursor
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

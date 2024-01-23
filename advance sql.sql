@@ -25,7 +25,7 @@ ELSE
 
 
 
-
+drop function dbo.ValidateEmail
 
 
 2
@@ -80,6 +80,7 @@ exec pr_5
 alter PROCEDURE GetEmployeeInfo
 AS
 BEGIN
+
     DECLARE @name VARCHAR(255);
     DECLARE @joining_date DATE;
     DECLARE @salary int;
@@ -101,6 +102,32 @@ BEGIN
 
     CLOSE employee_cursor;
     DEALLOCATE employee_cursor;
+
 END;
 
 exec GetEmployeeInfo
+
+
+
+
+	DECLARE @name VARCHAR(255);
+	DECLARE @joining_date DATE;
+	DECLARE @salary int;
+
+	DECLARE employee_cursor CURSOR scroll FOR
+		SELECT TOP 10 first_name, hire_date, salary FROM Employee;
+
+	OPEN employee_cursor;
+
+		FETCH first FROM employee_cursor INTO @name, @joining_date, @salary;
+
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+		-- Print employee information
+		PRINT CONCAT(@name, ' hired on ', @joining_date, ' has a salary package of ', @salary);
+
+		FETCH NEXT FROM employee_cursor INTO @name, @joining_date, @salary;
+	END;
+
+	CLOSE employee_cursor;
+	DEALLOCATE employee_cursor;
