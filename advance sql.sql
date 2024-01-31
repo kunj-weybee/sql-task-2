@@ -3,15 +3,15 @@
 
 create FUNCTION dbo.ValidateEmail(@email VARCHAR(50))
 RETURNS BIT
-	AS 
-	BEGIN
+AS 
+BEGIN
 	declare @isValid bit
 	SET @isValid = CASE 
 					WHEN @email LIKE '%@%.%'
                     THEN 1 
                     ELSE 0 
                   END
-	Return @isValid;
+RETURN @isValid;
 END;
 
 DECLARE @email NVARCHAR(50) = 'kunjv25@gmail.com'
@@ -31,12 +31,12 @@ drop function dbo.ValidateEmail
 2
 
 create FUNCTION dbo.GetDepartment(@dName varchar(10))
-	RETURNS table
-	AS
-	RETURN (select * from employee
-			where department_id = ( select department_id 
-									from departments
-									where department_name = @dName) )
+RETURNS table
+AS
+RETURN (select * from employee
+		where department_id = ( select department_id 
+								from departments
+								where department_name = @dName) )
 
 
 select * from dbo.GetDepartment('IT')
@@ -45,14 +45,14 @@ select * from dbo.GetDepartment('IT')
 
 3
 
-CREATE FUNCTION dbo.GetRecordofPage(@show_page int , @row_in_one_page int)
+CREATE FUNCTION dbo.GetRecordofPage(@page_no int , @row_in_one_page int)
 RETURNS table
 AS
 RETURN (
 			select * 
 			from employee
 			order by employee_id
-			offset (@show_page - 1) * @row_in_one_page rows
+			offset (@page_no - 1) * @row_in_one_page rows							// (page-1) * row
 			fetch next @row_in_one_page rows only
 		)
 
@@ -119,7 +119,7 @@ exec GetEmployeeInfo
 
 	OPEN employee_cursor;
 
-		FETCH first FROM employee_cursor INTO @name, @joining_date, @salary;
+	FETCH first FROM employee_cursor INTO @name, @joining_date, @salary;
 
 	WHILE @@FETCH_STATUS = 0
 	BEGIN

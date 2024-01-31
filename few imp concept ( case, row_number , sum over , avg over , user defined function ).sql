@@ -187,13 +187,15 @@ FROM Employees
 
 -- offset and fetch ( used in pagination )
 
+-- we have to compulsory use it with Order BY
+
+
 -- syntax =
 select ___ from ___
 order by ______
 offset 2 rows
 fetch next 2 rows only
 
--- have to be used with Order BY
 -- offset will ship particular no. of rows and fetch will display given no. of rows
 
 use testing

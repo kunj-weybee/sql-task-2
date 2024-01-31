@@ -1,0 +1,245 @@
+->	task is a single unit of work that is to be done.
+
+->	tread define flow of execution in program.
+
+->	In a .NET Core application, CLR creates a single foreground thread to execute application                                                                                                                      code via the Main method. 
+
+->	This thread is called the primary thread. 
+
+->	Along with  this main thread, a process can create one or more threads to execute a portion of the code. 
+
+->	A program can also use the ThreadPool class to execute code on worker threads that the CLR manages.
+
+
+->	Multithreading, or simply threading, allows us to create secondary threads 
+	that may be used to execute time-consuming background tasks and 
+	leave the primary thread available to the main program. 
+	
+	
+-> 	A thread pool is a pool of worker threads that have already been created and are available for apps to use as needed. 
+	Once thread pool threads finish executing their tasks, they return to the pool.
+	
+	
+->	Thread pool threads are suitable only for the background process and are not recommended for foreground threads. 
+	There is only one thread pool per process.
+	
+	
+	
+	
+using System;
+using System.Threading.Tasks;
+
+class Program
+{
+    static async Task Main()
+    {
+        Console.WriteLine("Start");
+        await MyAsyncMethod();
+        Console.WriteLine("End");
+
+        Console.ReadLine();
+    }
+
+    static async Task MyAsyncMethod()
+    {
+        Console.WriteLine("Async method start");
+
+        await Task.Delay(2000);
+
+        Console.WriteLine("Async method end");
+    }
+}
+
+
+// Start
+// Async method start   
+                                        //  AFTER 2 SEC
+// Async method end
+// End
+
+
+
+
+
+#	Task.Delay and Task.Wait =
+
+->	Task.Delay is used to introduce a delay in asynchronous code without blocking the current thread.
+
+->	Task.Wait is used to block the current thread until a Task completes.
+
+
+
+#	using GetResult() instead of await =  		
+
+task.GetResult() , await task
+
+example = 
+
+using System;
+using System.Threading.Tasks;
+
+class Program
+{
+    static async Task Main()
+    {
+        Task<int> task = Task.Run(() => CalculateResultAsync());
+
+        // Using await to asynchronously wait for task completion
+        int result = await task;
+        Console.WriteLine("Result using await: " + result);
+
+        // Using GetResult to synchronously get the result
+        int resultSync = task.GetResult();
+        Console.WriteLine("Result using GetResult: " + resultSync);
+
+        // Using Wait to block the current thread until the task completes
+        task.Wait();
+        Console.WriteLine("Task has completed.");
+
+        Console.ReadLine();
+    }
+
+    static int CalculateResultAsync()
+    {
+        Task.Delay(2000).Wait(); // Simulating asynchronous work
+        return 42;
+    }
+}
+
+
+
+
+#	Event , Delegates = 
+
+function/method -> delegates -> events
+
+->	event depends on delegates can not be created without delegates . 
+
+
+# delegate =
+	->	we can say delegate is a variable which holds method instead of data.	
+						public delegate void ___()
+						
+	-> 	delegate is used to encapsulate method. by calling method indirectly.
+						
+	->	delegate signaure should be same as method signaure. (int a, int b).	parenthesis + parameter = signature
+		delegate should have same typr of return type and same no. of parameter and same type of paramater.
+
+	->	delegate does not have body . that is {  }.
+	
+	->	it is refrence type.
+	->	delegate can point to more than 1 method. hre i point to add, multiply.
+	
+	->	to use delegate we will make object of delegate and contains reference of method that need to be invoked.
+	
+
+# event = 	
+	->	events are way for class to notify other class and object that event has occured.
+	
+	->	it is like publisher subscriber model where delegate object is publisher and target method is subscriber.
+
+eg = delegate
+
+
+using System;
+using System.Threading.Tasks;
+
+public delegate void Calculator(int x, int y);
+class Program
+{
+    public static void Add(int a, int b)
+    {
+        Console.WriteLine(a + b);
+    }
+    public static void Multiply(int a, int b)
+    {
+        Console.WriteLine(a * b);
+    }
+    static void Main(string[] args)
+    {
+        //Instantiating Delegate
+        Calculator calc = new Calculator(Add);  // delegate pointing to Add method		// it is way to call method indirectly.
+        calc(20, 30); 	// 50			or 			calc.Invoke(10,20);
+
+        calc = Multiply;  // delegate pointing to Multiply method
+        calc(10, 20);	// 200
+
+
+        Console.ReadLine();
+    }
+}
+
+
+events = 
+
+//using System;
+//using System.Collections;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Security.Cryptography;
+//namespace CSharpProgram
+//{
+//    class Program
+//    {
+//        static void Main(string[] args)
+//        {
+//            List<string> names = new List<string>();
+//            names.Add("Sonoo");
+//            names.Add("Irfan");
+//            names.Add("Peter");
+//            names.Add("James");
+//            names.Add("Ratan");
+//            names.Add("Irfan");
+
+//            Console.WriteLine(names.IndexOf("Irfan", 2, 4)); // = 5 ,ans is index 5           // start drom index 2. from index 2 see 4 elements
+
+
+//            Console.ReadKey();
+//        }
+//    }
+//}
+
+
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        RegisterUser registerUser_obj = new RegisterUser();
+        EmailVerification emailVerification_obj = new EmailVerification();
+        SMSVerification smsVerification_obj = new SMSVerification();
+
+        registerUser_obj.registerUserEvent += emailVerification_obj.OnUserRegistered; //subscribe to an event  
+        registerUser_obj.registerUserEvent += smsVerification_obj.OnUserRegistered; //subscribe to an event  
+        registerUser_obj.RegisterAUser(); // publisher  
+        Console.ReadLine();
+    }
+}
+public class RegisterUser
+{
+    public delegate void registerUserEventHandler(object source, EventArgs Args); //define a delegate  
+    public event registerUserEventHandler registerUserEvent; // define an event  
+    public void RegisterAUser()
+    {
+        Console.WriteLine("User registered");
+        if (registerUserEvent != null)
+        {
+            registerUserEvent(this, EventArgs.Empty); // call event  
+        }
+    }
+}
+public class EmailVerification
+{
+    public void OnUserRegistered(object source, EventArgs e)
+    {
+        Console.WriteLine("Sent Email for Verification");
+    }
+}
+public class SMSVerification
+{
+    public void OnUserRegistered(object source, EventArgs e)
+    {
+        Console.WriteLine("Sent SMS for Verification");
+    }
+}

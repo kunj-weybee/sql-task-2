@@ -225,7 +225,7 @@ class Program
 using System;
 class Program
     {
-        static void Show(out int a)
+        static void Show(out int a)							// if you don't use a in show function then it gives error
         {
             Console.WriteLine(a);	// incorrect					int b = 60;	
             int b = 60;												a = b; 		// once value of a is initialize then only we can use a		
@@ -419,13 +419,13 @@ class Program
 3 ways to declare = 
 
 
-1.		int[,] a = new int[,] {{ 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 }};
+1.		int[,] a = new int[,] {{ 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 }};					// int[] a = new int[]{ 10, 20, 30, 40, 50 };  
 
  
-2.		int[,] c = new int[3, 3] {{ 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 }};  
+2.		int[,] a = new int[3, 3] {{ 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 }};  				// int[] a = new int[5]{ 10, 20, 30, 40, 50 };
 
 
-3.		int[,] b = {{ 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 }};  
+3.		int[,] a = {{ 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 }}; 						// int[] a = { 10, 20, 30, 40, 50 };  
 
 
 
@@ -616,7 +616,7 @@ Add(1,2,3);
 
 // CLASS & OBJECT = 
 
-we can initialise the value of 1 classs from another class by 3 ways = 
+we can initialise the value of variable OF 1 class from another class by 3 ways = 
 
 1. by method =
 
@@ -732,11 +732,14 @@ we can initialise the value of 1 classs from another class by 3 ways =
                         using System;
                         public class Employee
                         {
+
                             int a;
+
                             public Employee()
                             {
                                 a = 5;
                             }
+
                             public static void Main(string[] args)
                             {
                                 Employee e1 = new Employee();
@@ -787,7 +790,7 @@ we can initialise the value of 1 classs from another class by 3 ways =
 
 // this = 
 
-
+it refers to the current instance of the class.
 
                                 using System;
 
@@ -809,6 +812,7 @@ we can initialise the value of 1 classs from another class by 3 ways =
                                         Console.WriteLine(id + " " + name + " " + salary);
                                     }
                                 }
+
                                 class TestEmployee
                                 {
                                     public static void Main(string[] args)
@@ -828,10 +832,10 @@ we can initialise the value of 1 classs from another class by 3 ways =
 
 
 In C# below can be static = 	 
-	field, 
+	class, 
 	method, 
 	constructor, 			// in java it was not static
-	class, 
+	field, 
 	properties, 
 	operator, 
 	event 	 		
@@ -953,26 +957,23 @@ In C# below can be static =
 
 // static constructor =  
 
--> 	C# static constructor is used to initialize static fields.
-
-
 -> 	C# static constructor cannot have any modifier or parameter.
 -> 	C# static constructor is invoked implicitly. It can't be called explicitly.
 
+->	it is called before any static member is called.
 
--> 	only statc constructor can initialize static variables.	Static variables are typically initialized using a static constructor or at the time of declaration.
+-> 	Static variables are typically initialized using a static constructor or at the time of declaration.
 
                                                     public class MyClass
                                                     {
-
-                                                        // Static variable initialized using a static constructor
+                                                      
                                                         public static int a;
 
 
                                                         // Normal constructor (instance constructor)
                                                         public MyClass()
                                                         {
-                                                            a = 20;        // wrong             // This constructor cannot initialize static variables
+                                                            a = 20;        // correct 
                                                         }
 
 
@@ -981,6 +982,14 @@ In C# below can be static =
                                                         {
                                                             a = 20;        // correct
                                                         }
+
+
+							public static void Main(string[] args)
+							{
+    								MyClass m = new MyClass();
+    								Console.WriteLine(a);
+    								Console.ReadLine(); 
+							}
                                                     }
 
 
@@ -994,11 +1003,11 @@ In C# below can be static =
 
                                                     public int id;
                                                     public String name;
-                                                    public static float rateOfInterest;                   // static members can only be initialised with static constructor
+                                                    public static float rateOfInterest;                   // static members can be initialised with static constructor as well as normal constructor
 
                                                     public Account(int id, String name)
                                                     {
-                                                        this.id = id;
+                                                        this.id = id; 	
                                                         this.name = name;
                                                     }
 
@@ -1028,11 +1037,86 @@ In C# below can be static =
 
                                 
 
+// struct = 
+
+-> it is user-defined datatype.
+-> we can declare methods/function , constructor , etc in struct
+
+-> when we are using struct it is not necessary to use new keyword to create object (instance). where as in class it is necessary to write new for creating object or instance.
+
+
+-> we can initialise variable at the time of declaration in class . but we can't initialise at declaration.
+
+class =
+
+int a = 10;
+
+
+
+
+struct = 
+
+int a;	
+objectname.a = 10;
+
+
+
+
 
 // enum = 
 
 it is enumeration .
 
+-> it is a group/set of constants .
+-> which we can not change later. there are 12 months , 7 days in week . we cannot change to 8 days week.
+
+enum Months
+{
+  January,    // 0
+  February,   // 1
+  March,      // 2
+  April,      // 3
+  May,        // 4
+  June,       // 5
+  July        // 6
+}
+
+
+
+
+
+                                using System;
+
+                                namespace kunj
+                                {
+                                    public class MyClass
+                                    {
+                                        enum Months
+                                        {
+                                            January,    // 0
+                                            February,   // 1
+                                            March,      // 2
+                                            April,      // 3
+                                            May,        // 4
+                                            June,       // 5
+                                            July        // 6
+                                        }
+
+                                        public static void Main(string[] args)
+                                        {
+                                            Console.WriteLine((int)Months.January + " is "+Months.January);     // 0 is January
+            
+                                            string name = Months.January.ToString();
+                                            int number = (int)Months.January;
+            
+                                            Console.WriteLine(name);                                            // January
+                                            Console.WriteLine(number);                                          // 0
+
+                                            Console.ReadLine();
+                                        }
+
+                                    }
+                                }
 
 
 
@@ -1040,21 +1124,99 @@ it is enumeration .
 
 
 
+// Inheritance = 
+
+
+in java = 
+
+class A			base class
+{}
+
+
+class B extends A   	derived class
+{}
 
 
 
 
 
+in c# = 
+
+class A			base class
+{}
+	
+class B:A		derived class
+{}
+
+
+
+types of inheritance in c# = 
+
+1. Single 
+2. Multi-level	
+3. hierarichal
+4. Multiple (using interface)
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+list = 
+
+
+* insert into list at last = 
+
+	List<int> l = new List<int>();
+
+ 	l.Add(100);
+ 	l.Add(200);
+ 	l.Add(300);
+ 	l.Add(400);
+ 
+	foreach (int i in l)
+	{
+   	     Response.Write(i);
+	}
+
+* insert element at specific position by it should in continues manner = 
+
+	    List<int> myList = new List<int>() { 1,2,3 };
+
+            myList.Insert(1, 4);        // on index 1 insert value 4
+
+ 
+            foreach (int i in myList)
+            {
+                Console.WriteLine(i);
+            }
+
+output =    //1
+            //4
+            //2
+            //3
 
 
 
 
+* we can also insert range (inserting more than 1 value ) by InsertRange(1, myList2)
+
+	List<int> myList1 = new List<int>() { 1,2,3 };
+	List<int> myList2 = new List<int>() { 4, 5, 6 };
+
+	myList1.InsertRange(1, myList2);	// insert mylist2 on index 1
 
 
+* merge 2 list = 
 
+	List<int> myList1 = new List<int>() { 1,2,3 };
+	List<int> myList2 = new List<int>() { 4, 5, 6 };
 
+	myList1.AddRange(myList2);
 
-
-
+ 
+	foreach (int i in myList1)
+	{
+ 	   Console.WriteLine(i);
+	}
 
 
