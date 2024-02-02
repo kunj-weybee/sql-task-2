@@ -1,0 +1,116 @@
+
+
+	1. create connection 	 	 SqlConnection con = new SqlConnection("data source=DESKTOP-QPRT2AR; database=testing; integrated security=SSPI");
+
+	2. write sql query		 SqlCommand cm = new SqlCommand($"select * from employee", con);
+
+	3. open connection		 con.Open(); 
+ 
+	4. execute command		 SqlDataReader dr = cm.ExecuteReader();						(for select query only)
+				 	 while (dr.Read())
+				 	 {
+    						 Console.WriteLine(dr[0] + "," + dr[1] + "," + dr[2]);
+				 	 }
+
+	5. execute command 		 cm.ExecuteNonQuery();								(for insert query)
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+data provider = -they are used to connect database like sql server to our application using 
+		 namespace System.Data.SQLClient .
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+data adapter = it act as mediater between data set and sql database.
+		
+		-it takes data from databse and fill in dataset.
+		-after updating data in data set we can update in databse also with data adapter.
+
+		-it is in-memory represenetation of collection of databse object including table.
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+(read / update data in - memory and give to database through data adapter)
+data-set = 
+
+	-It is a collection of data tables that contain the data. 
+	-It is used to fetch data without interacting with a Data Source that's why, it also known as disconnected data access method. 
+	-It is an in-memory data store that can hold more than one table at the same time. 
+
+
+
+(only read data from database)
+data-reader = 
+
+	- it is used to read data from database and only possible when connected.
+	- It reads data in forward-only direction of rows from a sql server database.  
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+using(connection string) = 
+
+	using (SqlConnection con = new SqlConnection("data source=DESKTOP-QPRT2AR; database=testing; integrated security=SSPI"))
+	{
+    		con.Open();			// opening conn is necessary . no need to close.
+
+	}
+
+	- by using "using" we no need to close connection explicitely.
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+da.Fill(ds) = fill method is used to populate a DataSet(ds) with data from a data source (sql) using a data adapter (da).
+da.Fill(dt) = for data table
+
+while when we want to add DataTable into DataSet then we have to do ( without using DataAdapter ) =
+
+	
+	DataSet myDataSet = new DataSet("MyDataSet");		// Create a DataSet
+        DataTable myTable = new DataTable("MyTable");	        // Create a DataTable
+
+	myTable.Columns.Add("ID", typeof(int));			// add column to DataTable
+        myTable.Columns.Add("Name", typeof(string));
+
+        myDataSet.Tables.Add(myTable);				// Add the DataTable to the DataSet
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+DataTable = we can create table in c# using this.
+
+	# Example =
+
+ 	DataTable dt = new DataTable("MyDataTable");		// create datatable with name MyDataTable
+        
+	dt.Columns.Add("ID", typeof(int));			// add column name
+        dt.Columns.Add("Name", typeof(string));
+
+	Console.WriteLine(dt.TableName);			// print table name	// MyDataTable
+
+
+	DataRow row1 = dt.NewRow();			// add row	1
+        row1["ID"] = 1;
+        row1["Name"] = "John";
+        dt.Rows.Add(row1);
+
+
+        DataRow row2 = dt.NewRow();			// add row	2
+        row2["ID"] = 2;
+        row2["Name"] = "Jane";
+        dt.Rows.Add(row2);
+
+
+	foreach (DataRow row in dt.Rows)
+	{
+    		Console.WriteLine(row[0]+" "+row[1]);
+	}
