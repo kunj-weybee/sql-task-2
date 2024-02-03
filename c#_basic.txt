@@ -1045,7 +1045,7 @@ In C# below can be static =
 -> when we are using struct it is not necessary to use new keyword to create object (instance). where as in class it is necessary to write new for creating object or instance.
 
 
--> we can initialise variable at the time of declaration in class . but we can't initialise at declaration.
+-> we can initialise variable at the time of declaration in class . but in struct we can't initialise at declaration.
 
 class =
 
